@@ -53,7 +53,7 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	protected String getValorFormatado() {
 
-		// TODO: Explicar o que este método está fazendo
+		// TODO: Esse método está convertendo os numeros da linha digitavel em decimais. 
 		return String.format(
 				"%010d",
 				Long.valueOf(valor.setScale(2, RoundingMode.HALF_UP).toString()
@@ -176,10 +176,11 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	protected static long diferencaEmDias(Date dataInicial, Date dataFinal) {
 
-		// TODO: Estude a Math e escreva aqui o que este método está fazendo
-
+		// Estude a Math e escreva aqui o que este método está fazendo
+				//86400000D É igual a 1 dia
 		return Math
 				.round((dataFinal.getTime() - dataInicial.getTime()) / 86400000D);
+		
 	}
 
 	public int getDvCodigoBarras() {
