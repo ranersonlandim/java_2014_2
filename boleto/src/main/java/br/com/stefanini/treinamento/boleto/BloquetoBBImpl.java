@@ -53,7 +53,8 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	protected String getValorFormatado() {
 
-		// TODO: Esse método está convertendo os numeros da linha digitavel em decimais. 
+		// TODO: Esse método está convertendo os numeros da linha digitavel em
+		// decimais.
 		return String.format(
 				"%010d",
 				Long.valueOf(valor.setScale(2, RoundingMode.HALF_UP).toString()
@@ -82,8 +83,10 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 * @return
 	 */
 	private String ldCampo5() {
-		// TODO: COMPLETAR
-		return "";
+		StringBuilder buffer = new StringBuilder();
+		buffer.append(fatorVencimento);
+		buffer.append(getValorFormatado());
+		return buffer.toString();
 	}
 
 	/**
@@ -92,8 +95,8 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 * @return
 	 */
 	private String ldCampo4() {
-		// TODO: COMPLETAR
-		return "";
+		return String
+				.valueOf(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito()));
 	}
 
 	/**
@@ -102,9 +105,8 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 * @return
 	 */
 	private String ldCampo3() {
-
-		// TODO: COMPLETAR
-		return "";
+		return String.format("%s.%s", getCodigoBarras().substring(34, 39),
+				getCodigoBarras().substring(39, 44));
 	}
 
 	/**
@@ -113,9 +115,8 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 * @return
 	 */
 	private String ldCampo2() {
-		// TODO: COMPLETAR
-
-		return "";
+		return String.format("%s.%s", getCodigoBarras().substring(24, 29),
+				getCodigoBarras().substring(29, 34));
 	}
 
 	/**
@@ -125,9 +126,9 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 * @return
 	 */
 	protected int digitoVerificadorPorCampo(String campo, boolean valor) {
-		// TODO: COMPLETAR
-
-		return 0;
+             campo = campo.replace (".", "");
+             campo =
+             return 0;
 	}
 
 	/**
@@ -150,7 +151,9 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	private String ldCampo1() {
 		StringBuilder buffer = new StringBuilder();
-		// TODO: COMPLETAR
+		buffer.append(codigoBanco);
+		buffer.append(codigoMoeda);
+		buffer.append(getLDNumeroConvenio());
 		return buffer.toString();
 
 	}
@@ -160,8 +163,23 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 		init();
 
 		StringBuilder buffer = new StringBuilder();
-		// TODO: COMPLETAR
-
+		buffer.append(ldCampo1());
+		buffer.append(digitoVerificadorPorCampo(ldCampo1(), true));
+		buffer.append(" ");
+		
+		buffer.append(ldCampo2());
+		buffer.append(digitoVerificadorPorCampo(ldCampo2(), false));
+		buffer.append(" ");
+		
+		buffer.append(ldCampo3());
+		buffer.append(digitoVerificadorPorCampo(ldCampo3(), false));
+		buffer.append(" ");
+		
+		buffer.append(ldCampo4());
+		buffer.append(" ");
+		
+		buffer.append(ldCampo5());
+	
 		return buffer.toString();
 	}
 
@@ -177,10 +195,10 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	protected static long diferencaEmDias(Date dataInicial, Date dataFinal) {
 
 		// Estude a Math e escreva aqui o que este método está fazendo
-				//86400000D É igual a 1 dia
+		// 86400000D É igual a 1 dia
 		return Math
 				.round((dataFinal.getTime() - dataInicial.getTime()) / 86400000D);
-		
+
 	}
 
 	public int getDvCodigoBarras() {
