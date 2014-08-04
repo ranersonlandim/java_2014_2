@@ -94,14 +94,17 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 
 	@Override
 	protected String getLDNumeroConvenio() {
-		
-		String convenio = String.format("%04d", Long.valueOf(numeroConvenioBanco));
-	return String.format("%s.%s",  convenio.substring(0,1), convenio.substring(1,5));
+
+		String convenio = String.format("%04d",
+				Long.valueOf(numeroConvenioBanco));
+		return String.format("%s.%s", convenio.substring(0, 1),
+				convenio.substring(1, 5));
 
 	}
 
 	// TODO: @sandro - refatorar os métodos getCodigoBarrasSemDigito() e
 	// getCodigoBarras()
+	// Completo
 
 	@Override
 	protected String getCodigoBarrasSemDigito() {
@@ -128,19 +131,19 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 		init();
 
 		StringBuilder buffer = new StringBuilder();
-		
+
 		buffer.append(codigoBanco);
-		buffer.append(codigoMoeda); 
-		buffer.append(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito())); 
-		
-		buffer.append(fatorVencimento); 
-		buffer.append(getValorFormatado()); 
-		buffer.append(numeroConvenioBanco); 
-		
+		buffer.append(codigoMoeda);
+		buffer.append(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito()));
+
+		buffer.append(fatorVencimento);
+		buffer.append(getValorFormatado());
+		buffer.append(numeroConvenioBanco);
+
 		buffer.append(complementoNumeroConvenioBancoSemDV);
 		buffer.append(numeroAgenciaRelacionamento);
-		buffer.append(contaCorrenteRelacionamentoSemDV); 
-		buffer.append(tipoCarteira); 
+		buffer.append(contaCorrenteRelacionamentoSemDV);
+		buffer.append(tipoCarteira);
 
 		return buffer.toString();
 	}

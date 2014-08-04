@@ -14,6 +14,7 @@ import br.com.stefanini.treinamento.exception.ManagerException;
 public class BloquetoBBConvenio6 extends BloquetoBBImpl implements BloquetoBB {
 
 	// TODO: FAZER VALIDAÇÕES
+	// Validações Realizadas
 	@Override
 	protected void validaDados() throws ManagerException {
 
@@ -113,6 +114,7 @@ public class BloquetoBBConvenio6 extends BloquetoBBImpl implements BloquetoBB {
 
 	// TODO: @sandro - refatorar os métodos getCodigoBarrasSemDigito() e
 	// getCodigoBarras()
+	// Completo
 
 	@Override
 	protected String getCodigoBarrasSemDigito() {
@@ -158,9 +160,9 @@ public class BloquetoBBConvenio6 extends BloquetoBBImpl implements BloquetoBB {
 			buffer.append(numeroAgenciaRelacionamento);
 			buffer.append(contaCorrenteRelacionamentoSemDV);
 		}
-		
+
 		buffer.append(tipoCarteira);
-		
+
 		return buffer.toString();
 	}
 

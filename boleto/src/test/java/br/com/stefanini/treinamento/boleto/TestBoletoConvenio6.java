@@ -40,8 +40,7 @@ public class TestBoletoConvenio6 {
 				numeroAgenciaRelacionamento, contaCorrenteRelacionamentoSemDV,
 				tipoCarteira);
 
-		Assert.assertEquals(bloqueto.getCodigoBarras(),
-				"00195614000000655871234561234521210142357417");
+		Assert.assertEquals(bloqueto.getCodigoBarras(), "00195614000000655871234561234521210142357417");
 
 	}
 

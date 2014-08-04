@@ -32,6 +32,7 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 		long dias = diferencaEmDias(dataBase, dataVencimento);
 
 		// TODO: EXPLICAR O QUE ESTE MÉTODO ESTÁ FAZENDO
+		// Esse método mostra os dias em que a fatura está vencida
 
 		fatorVencimento = String.format("%04d", dias);
 
@@ -126,9 +127,26 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 * @return
 	 */
 	protected int digitoVerificadorPorCampo(String campo, boolean valor) {
-             campo = campo.replace (".", "");
-             campo =
-             return 0;
+		campo = campo.replace(".", "");
+		int soma = 0;
+		int resultado = 0;
+
+		for (char numero : campo.toCharArray()) {
+			resultado = Character.getNumericValue(numero) * (valor ? 2 : 1);
+			soma += resultado <= 9 ? resultado : (resultado - 10) + 1;
+			valor = !valor;
+		}
+
+		int proximaDezena = ((soma / 10) + 1) * 10;
+
+		int dvCampo = (proximaDezena - (proximaDezena - 10 + soma));
+
+		if (dvCampo >= 10) {
+			return 1;
+		}
+
+		return dvCampo;
+
 	}
 
 	/**
@@ -166,20 +184,20 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 		buffer.append(ldCampo1());
 		buffer.append(digitoVerificadorPorCampo(ldCampo1(), true));
 		buffer.append(" ");
-		
+
 		buffer.append(ldCampo2());
 		buffer.append(digitoVerificadorPorCampo(ldCampo2(), false));
 		buffer.append(" ");
-		
+
 		buffer.append(ldCampo3());
 		buffer.append(digitoVerificadorPorCampo(ldCampo3(), false));
 		buffer.append(" ");
-		
+
 		buffer.append(ldCampo4());
 		buffer.append(" ");
-		
+
 		buffer.append(ldCampo5());
-	
+
 		return buffer.toString();
 	}
 
@@ -195,7 +213,12 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	protected static long diferencaEmDias(Date dataInicial, Date dataFinal) {
 
 		// Estude a Math e escreva aqui o que este método está fazendo
-		// 86400000D É igual a 1 dia
+
+		/**
+		 * Esse método mostra a diferença em dias pegando a data final,
+		 * subtraindo da data final e dividindo por 86400000D(um dia) E retorna
+		 * o valor da diferença 86400000D É igual a 1 dia
+		 */
 		return Math
 				.round((dataFinal.getTime() - dataInicial.getTime()) / 86400000D);
 
